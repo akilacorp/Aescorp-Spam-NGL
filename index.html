@@ -19,21 +19,36 @@
       <textarea name="mensagem" rows="4" required></textarea>
 
       <button type="submit">Enviar Mensagens</button>
+
+      <a href="https://whatsapp.com/channel/0029Vaze0KiD38CUIIiZJG0W" target="_blank" class="canal-btn" style="margin-top: 10px;">Canal AESCORP</a>
     </form>
 
-    <div class="botoes-acoes">
-      <a href="https://whatsapp.com/channel/0029Vaze0KiD38CUIIiZJG0W" target="_blank" class="canal-btn">Canal AESCORP</a>
-      <form id="formParar" action="/parar" method="post">
-        <button type="submit">Parar Envio</button>
-      </form>
-    </div>
-
     <p id="status"></p>
-    <p id="contador">Enviadas: 0 / 100</p>
+    <p id="contador-label">Mensagens Enviadas:</p>
+    <p id="contador">0 / 100</p>
   </div>
 
   <script>
-    let intervaloAtualizacao;
+    let valorAtual = 0;
+    const valorFinal = 100;
+    let animandoContador = false;
+
+    function atualizarContadorSuave(valor) {
+      if (animandoContador) return;
+      animandoContador = true;
+      const incremento = 1;
+
+      const intervalo = setInterval(() => {
+        if (valorAtual >= valor) {
+          clearInterval(intervalo);
+          animandoContador = false;
+          document.getElementById('status').innerText = 'Status: Disparo concluído.';
+          return;
+        }
+        valorAtual += incremento;
+        document.getElementById('contador').innerText = `${valorAtual} / ${valorFinal}`;
+      }, 60);
+    }
 
     const form = document.getElementById('formEnviar');
     form.addEventListener('submit', async (e) => {
@@ -44,29 +59,12 @@
         body: new FormData(form),
       });
 
-      const res = await fetch('/enviar', { method: 'POST' });
-      const data = await res.json();
-      document.getElementById('status').innerText = 'Status: ' + data.status;
+      document.getElementById('status').innerText = 'Status: Disparo iniciado.';
+      valorAtual = 0;
+      document.getElementById('contador').innerText = `0 / ${valorFinal}`;
 
-      intervaloAtualizacao = setInterval(async () => {
-        const progresso = await fetch('/progresso');
-        const json = await progresso.json();
-        document.getElementById('contador').innerText =
-          `Mensagens Enviadas: ${json.enviadas} / ${json.total}`;
-
-        if (json.enviadas >= json.total) {
-          clearInterval(intervaloAtualizacao);
-        }
-      }, 1000);
-    });
-
-    const parar = document.getElementById('formParar');
-    parar.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const res = await fetch('/parar', { method: 'POST' });
-      const data = await res.json();
-      document.getElementById('status').innerText = 'Status: ' + data.status;
-      clearInterval(intervaloAtualizacao);
+      await fetch('/enviar', { method: 'POST' });
+      atualizarContadorSuave(valorFinal);
     });
   </script>
 
