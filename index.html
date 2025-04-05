@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>SPAM NGL AESCORP</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="container">
+    <h1>SPAM NGL AESCORP</h1>
+
+    <form id="formEnviar" action="/enviar" method="post">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+
+      <label>Mensagem:</label>
+      <textarea name="mensagem" rows="4" required></textarea>
+
+      <button type="submit">Enviar Mensagens</button>
+    </form>
+
+    <form id="formParar" action="/parar" method="post">
+      <button type="submit">Parar Envio</button>
+    </form>
+
+    <p id="status"></p>
+    <p id="contador"> Enviadas: 0 / 100</p>
+  </div>
+
+  <script>
+    let intervaloAtualizacao;
+
+    const form = document.getElementById('formEnviar');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      await fetch('/atualizar', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+
+      const res = await fetch('/enviar', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('status').innerText = 'Status: ' + data.status;
+
+      intervaloAtualizacao = setInterval(async () => {
+        const progresso = await fetch('/progresso');
+        const json = await progresso.json();
+        document.getElementById('contador').innerText =
+          `Mensagens Enviadas: ${json.enviadas} / ${json.total}`;
+
+        if (json.enviadas >= json.total) {
+          clearInterval(intervaloAtualizacao);
+        }
+      }, 1000);
+    });
+
+    const parar = document.getElementById('formParar');
+    parar.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await fetch('/parar', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('status').innerText = 'Status: ' + data.status;
+      clearInterval(intervaloAtualizacao);
+    });
+  </script>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }, () => 1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = `${fontSize}px monospace`;
+
+      drops.forEach((y, x) => {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, x * fontSize, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[x] = 0;
+        }
+
+        drops[x]++;
+      });
+    }
+
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
