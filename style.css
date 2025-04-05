@@ -128,6 +128,35 @@
     to { opacity: 1; }
   }
   
+  .botoes-acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .canal-btn {
+    background-color: black;
+    color: #0f0;
+    border: 2px solid #0f0;
+    padding: 16px 24px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 0 6px #0f0, 0 0 12px #0f0 inset;
+    animation: neonGlow 1.5s infinite alternate;
+    transition: all 0.3s ease;
+  }
+  
+  .canal-btn:hover {
+    background-color: #0f0;
+    color: black;
+    box-shadow: 0 0 15px #0f0;
+  }
+  
   @media (max-width: 600px) {
     .container {
       padding: 30px;
@@ -153,6 +182,10 @@
   
     #contador {
       font-size: 24px;
+    }
+  
+    .botoes-acoes {
+      flex-direction: column;
     }
   }
   
