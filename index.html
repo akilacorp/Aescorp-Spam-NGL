@@ -1,103 +1,466 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>SPAM NGL AESCORP</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="public, max-age=604800, immutable">
+    <meta name="description" content="AesCorp.io - Os melhores serviços, painéis e bots para sua comunidade. Site rápido, responsivo e visual lendário.">
+    <title>AesCorp.io</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="icon" type="image/jpeg" href="aescorp.jpg">
 </head>
 <body>
-  <canvas id="matrixCanvas"></canvas>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <a href="#" class="brand-link"><span class="brand">AesCorp<span class="dot">.io</span></span></a>
+            </div>
+            <div class="navbar-center">
+                <div class="smile-animado">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" stroke="#a259ff" stroke-width="4" fill="#232946"/>
+                        
+                        <ellipse cx="17" cy="21" rx="2.5" ry="3.5" fill="#eebbc3" transform="rotate(-18 17 21)"/>
+                        <ellipse cx="31" cy="21" rx="2.5" ry="3.5" fill="#eebbc3" transform="rotate(18 31 21)"/>
+                        
+                        <path d="M14 17 Q17 15 20 18" stroke="#eebbc3" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M28 18 Q31 15 34 17" stroke="#eebbc3" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        
+                        <path class="evil-mouth" d="M17 32 Q24 26 31 32 Q24 38 17 32" stroke="#eebbc3" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="nav-icon home" title="Início">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a259ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3L3 12h3v7h4v-4h4v4h4v-7h3z" fill="none" stroke="#a259ff" stroke-width="2.2"/>
+                    </svg>
+                    <span class="nav-label">Início</span>
+                </a>
+                <a href="#paineis" class="nav-icon code" title="Painéis">
+                    <span class="code-btn">&lt;/&gt;</span>
+                    <span class="nav-label">Painéis</span>
+                </a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+        <nav class="mobile-menu" id="mobile-menu">
+            <button class="close-menu" id="close-menu" aria-label="Fechar menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a259ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <a href="#" class="mobile-link"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a259ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L3 12h3v7h4v-4h4v4h4v-7h3z" fill="none" stroke="#a259ff" stroke-width="2.2"/></svg> Início</a>
+            <a href="#paineis" class="mobile-link"><span class="code-btn">&lt;/&gt;</span> Painéis</a>
+            <a href="tel:+551152950000" class="mobile-link"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a259ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="#a259ff" stroke-width="2.2"/></svg> Suporte</a>
+        </nav>
+    </header>
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content" style="position:relative;overflow:hidden;">
+            <canvas id="matrixCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+            <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+                <h1 class="hero-title">AESCORP</h1>
+                <p class="hero-subtitle">Os melhores serviços e painéis aqui</p>
+                <div class="hero-warning">
+                    <span class="hero-warning-icon">⚡</span>
+                    <span class="hero-warning-text">Estamos pronto para fazer seus olhos brilharem</span>
+                </div>
+                <p class="hero-desc">Não somos o ceu mas estamos perto, não somos o inferno mas estamos perto</p>
+                <a href="https://whatsapp.com/channel/0029Vaze0KiD38CUIIiZJG0W" class="hero-btn">Ignorar tudo e ver o canal</a>
+            </div>
+        </div>
+    </section>
+    <section class="about-section">
+        <div class="about-box">
+            <div class="about-animated-line top"></div>
+            <p><span class="about-cyan">O que somos?</span> <span class="about-white">Não somos nada não somos niguem,</span></p>
+            <p><span class="about-white">só estamos aqui para entregar o melhor conteúdo de todos</span></p>
+            <p><span class="about-white">e evoluir o entretenimento na internet</span></p>
+            <p><span class="about-cyan">nós somos a <span class="about-pink">Aescorp</span></span> <span class="about-by" id="typewriter">By: Akila</span></p>
+            <div class="about-animated-line bottom"></div>
+        </div>
+    </section>
+    <section id="paineis" class="paineis-section-v2">
+        <div class="paineis-bg-grid"></div>
+        <div class="paineis-dash"></div>
+    </section>
+    <section class="paineis-section-v2 paineis-section-v2-cards">
+        <div class="paineis-cards">
+            <a href="https://aescorp-ddos-dc-git-main-akilas-projects-2c085fd3.vercel.app/" class="painel-card-v2 ddos" target="_blank">
+                <div class="painel-icon-v2">
+                    
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <ellipse cx="28" cy="28" rx="25" ry="25" stroke="#ff2d2d" stroke-width="3.5" filter="url(#glow-red)"/>
+                        <ellipse cx="20" cy="28" rx="3" ry="5" stroke="#ff2d2d" stroke-width="2" fill="none"/>
+                        <ellipse cx="36" cy="28" rx="3" ry="5" stroke="#ff2d2d" stroke-width="2" fill="none"/>
+                        <path d="M18 38 Q28 46 38 38" stroke="#ff2d2d" stroke-width="2.5" fill="none"/>
+                        <path d="M16 24 Q20 20 24 24" stroke="#ff2d2d" stroke-width="1.5" fill="none"/>
+                        <path d="M32 24 Q36 20 40 24" stroke="#ff2d2d" stroke-width="1.5" fill="none"/>
+                        <defs>
+                            <filter id="glow-red" x="-10" y="-10" width="76" height="76">
+                                <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff2d2d"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="painel-title-v2">Discord DDOS</div>
+                <div class="painel-desc-v2">Painel perfeito para fazer um ddos em servidores de discord denominados panelinhas</div>
+            </a>
+            <a href="https://v0-painel-de-dados.vercel.app/" class="painel-card-v2 detetive" target="_blank">
+                <div class="painel-icon-v2">
+                    
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <ellipse cx="28" cy="28" rx="25" ry="25" stroke="#00cfff" stroke-width="3.5" filter="url(#glow-cyan)"/>
+                        <ellipse cx="28" cy="36" rx="8" ry="4" stroke="#00cfff" stroke-width="2" fill="none"/>
+                        <ellipse cx="28" cy="32" rx="2.5" ry="2.5" stroke="#00cfff" stroke-width="2" fill="none"/>
+                        <rect x="22" y="20" width="12" height="6" rx="3" stroke="#00cfff" stroke-width="2" fill="none"/>
+                        <rect x="25" y="12" width="6" height="8" rx="3" stroke="#00cfff" stroke-width="2" fill="none"/>
+                        <circle cx="40" cy="40" r="4" stroke="#00cfff" stroke-width="2" fill="none"/>
+                        <rect x="44" y="44" width="6" height="2" rx="1" fill="#00cfff" transform="rotate(45 44 44)"/>
+                        <defs>
+                            <filter id="glow-cyan" x="-10" y="-10" width="76" height="76">
+                                <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#00cfff"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="painel-title-v2">Puxar dados</div>
+                <div class="painel-desc-v2">Painel para puxar dados e informações através do cpf nome e telefone</div>
+            </a>
+            <a href="https://olho-de-deus-three.vercel.app/" class="painel-card-v2 olho" target="_blank">
+                <div class="painel-icon-v2">
+                    
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <ellipse cx="28" cy="28" rx="25" ry="15" stroke="#ffd700" stroke-width="3.5" filter="url(#glow-gold)"/>
+                        <ellipse cx="28" cy="28" rx="7" ry="4" stroke="#ffd700" stroke-width="2" fill="none"/>
+                        <ellipse cx="28" cy="28" rx="2.5" ry="2.5" stroke="#ffd700" stroke-width="2" fill="none"/>
+                        <defs>
+                            <filter id="glow-gold" x="-10" y="-10" width="76" height="76">
+                                <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ffd700"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="painel-title-v2">PUXAR DADOS</div>
+                <div class="painel-desc-v2">Mais um painel de puxar dados esse aqui e mais básico do que o outro porem também e muito bom</div>
+            </a>
+            <a href="https://aescorp-spam-ngl.onrender.com/" class="painel-card-v2 ngl" target="_blank">
+                <div class="painel-icon-v2">
+                    
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <rect x="16" y="8" width="24" height="40" rx="6" stroke="#ff69b4" stroke-width="3.5" filter="url(#glow-pink)" fill="none"/>
+                        <circle cx="28" cy="44" r="2" stroke="#ff69b4" stroke-width="2" fill="none"/>
+                        <rect x="20" y="12" width="16" height="28" rx="3" stroke="#ff69b4" stroke-width="2" fill="none"/>
+                        <defs>
+                            <filter id="glow-pink" x="-10" y="-10" width="76" height="76">
+                                <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff69b4"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="painel-title-v2">SPAM NGL</div>
+                <div class="painel-desc-v2">Esse painel serve para enviar uma quantidade de spam para contas de NGl hehe</div>
+            </a>
+        </div>
+    </section>
+    
+    
+    <section class="telegram-bot-section">
+        <div class="telegram-separator">
+            <div class="separator-line"></div>
+            <div class="separator-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 3.33334C10.8 3.33334 3.33334 10.8 3.33334 20C3.33334 29.2 10.8 36.6667 20 36.6667C29.2 36.6667 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33334 20 3.33334Z" stroke="#00cfff" stroke-width="2.5" fill="none"/>
+                    <path d="M28.3333 13.3333L18.3333 23.3333L13.3333 18.3333" stroke="#00cfff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="separator-line"></div>
+        </div>
+        
+        <div class="bot-container">
+            <div class="bot-hologram">
+                <div class="hologram-rings">
+                    <div class="ring ring1"></div>
+                    <div class="ring ring2"></div>
+                    <div class="ring ring3"></div>
+                </div>
+                <div class="bot-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="38" stroke="#00cfff" stroke-width="4" fill="none" class="bot-circle"/>
+                        <path d="M55 25L35 45L25 35" stroke="#a259ff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="bot-check"/>
+                        <path d="M20 60L60 20" stroke="#eebbc3" stroke-width="4" fill="none" stroke-linecap="round" class="bot-line"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="bot-content">
+                <h2 class="bot-title">NOTZ SMS BOT</h2>
+                <div class="bot-description">
+                    <p>Adquira números virtuais +55 para verificações e cadastros</p>
+                    <div class="bot-features">
+                        <div class="feature">
+                            <span class="feature-icon">🔒</span>
+                            <span>Seguro</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">⚡</span>
+                            <span>Rápido</div>
+                        <div class="feature">
+                            <span class="feature-icon">💰</span>
+                            <span>Acessível</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://t.me/NotzSMSBot?start=7295514286" target="_blank" class="bot-button">
+                    <span class="button-text">ACESSAR BOT</span>
+                    <div class="button-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="#232946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#232946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#232946"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <div class="container">
-    <h1>SPAM NGL AESCORP</h1>
+    
+    <section class="whatsapp-bot-section">
+        <div class="whatsapp-separator">
+            <div class="separator-line green-glow"></div>
+            <div class="separator-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M34 19.9378C34 27.7255 27.7315 34 19.9378 34C16.8574 34 14.0098 33.0308 11.6687 31.3916L6 34L8.6084 28.3313C6.9692 25.9902 6 23.1426 6 20.0622C6 12.2745 12.2685 6 20.0622 6C27.7315 6 34 12.2745 34 19.9378Z" stroke="#25D366" stroke-width="2.5" fill="none"/>
+                    <path d="M27 24.7C25.5 26 23.5 26 22 26C18.5 26 15 22.5 15 19C15 17.5 16 15.5 17.3 14" stroke="#25D366" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M22.5 19.5C22.5 20.3284 21.8284 21 21 21C20.1716 21 19.5 20.3284 19.5 19.5C19.5 18.6716 20.1716 18 21 18C21.8284 18 22.5 18.6716 22.5 19.5Z" fill="#25D366"/>
+                    <path d="M27.5 19.5C27.5 20.3284 26.8284 21 26 21C25.1716 21 24.5 20.3284 24.5 19.5C24.5 18.6716 25.1716 18 26 18C26.8284 18 27.5 18.6716 27.5 19.5Z" fill="#25D366"/>
+                    <path d="M17.5 19.5C17.5 20.3284 16.8284 21 16 21C15.1716 21 14.5 20.3284 14.5 19.5C14.5 18.6716 15.1716 18 16 18C16.8284 18 17.5 18.6716 17.5 19.5Z" fill="#25D366"/>
+                </svg>
+            </div>
+            <div class="separator-line green-glow"></div>
+        </div>
+        
+        <div class="whatsapp-container">
+            <div class="whatsapp-phone">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="wa-header">
+                            <div class="wa-status-bar">
+                                <span>20:45</span>
+                                <div class="wa-status-icons">
+                                    <span>📶</span>
+                                    <span>🔋</span>
+                                </div>
+                            </div>
+                            <div class="wa-chat-header">
+                                <div class="wa-back-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                    </svg>
+                                </div>
+                                <div class="wa-profile">
+                                    <div class="wa-avatar">
+                                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                                            <circle cx="20" cy="20" r="20" fill="#a259ff"/>
+                                            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="16px" font-weight="bold">A</text>
+                                        </svg>
+                                    </div>
+                                    <div class="wa-info">
+                                        <div class="wa-name">AesCorp Bot</div>
+                                        <div class="wa-status">online</div>
+                                    </div>
+                                </div>
+                                <div class="wa-actions">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="1"/>
+                                        <circle cx="19" cy="12" r="1"/>
+                                        <circle cx="5" cy="12" r="1"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-chat-body">
+                            <div class="wa-message received">
+                                <div class="wa-bubble">
+                                    Olá! Sou o Bot de Proteção da AesCorp. Posso proteger seu grupo contra spam, links maliciosos e muito mais!
+                                </div>
+                                <div class="wa-time">20:40</div>
+                            </div>
+                            <div class="wa-message sent">
+                                <div class="wa-bubble">
+                                    Como faço para adicionar você no meu grupo?
+                                </div>
+                                <div class="wa-time">20:41</div>
+                            </div>
+                            <div class="wa-message received">
+                                <div class="wa-bubble">
+                                    Simples! Basta enviar o link do seu grupo para mim e eu entrarei automaticamente para protegê-lo!
+                                </div>
+                                <div class="wa-time">20:42</div>
+                            </div>
+                            <div class="wa-message received">
+                                <div class="wa-bubble">
+                                    Posso banir spammers, remover links maliciosos e manter seu grupo seguro 24/7! 🛡️
+                                </div>
+                                <div class="wa-time">20:43</div>
+                            </div>
+                        </div>
+                        <div class="wa-chat-input">
+                            <div class="wa-input-box">
+                                <svg class="wa-emoji-btn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                </svg>
+                                <div class="wa-input-text">Mensagem</div>
+                                <svg class="wa-send-btn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-reflection"></div>
+            </div>
+            
+            <div class="whatsapp-content">
+                <h2 class="whatsapp-title">BOT DE PROTEÇÃO</h2>
+                <div class="whatsapp-description">
+                    <p>Proteja seu grupo de WhatsApp contra spam, links maliciosos e usuários indesejados com nosso bot de segurança avançado.</p>
+                    <div class="whatsapp-features">
+                        <div class="feature">
+                            <span class="feature-icon">🛡️</span>
+                            <span>Anti-Spam</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🔗</span>
+                            <span>Bloqueio de Links</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">👮</span>
+                            <span>Moderação</span>
+                        </div>
+                    </div>
+                    <p class="whatsapp-instruction">Para adicionar o bot ao seu grupo, basta enviar o link do grupo para o número abaixo:</p>
+                </div>
+                <a href="https://wa.me/553184750235" target="_blank" class="whatsapp-button">
+                    <span class="button-text">ADICIONAR BOT</span>
+                    <div class="button-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.5 3.5L3.5 10L10 12L12 18.5L20.5 3.5Z" stroke="#232946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#232946"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <form id="formEnviar" action="/enviar" method="post">
-      <label>Username:</label>
-      <input type="text" name="username" required>
+    
+    <footer class="footer-section">
+        <div class="footer-waves">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-logo">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="55" stroke="url(#footer-gradient)" stroke-width="5" fill="none"/>
+                    <path d="M40 40L80 80" stroke="url(#footer-gradient)" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M80 40L40 80" stroke="url(#footer-gradient)" stroke-width="5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="footer-gradient" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#a259ff"/>
+                            <stop offset="50%" stop-color="#00cfff"/>
+                            <stop offset="100%" stop-color="#eebbc3"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-link-group">
+                    <h3>Comunidade</h3>
+                    <div class="contact-buttons">
+                        <a href="https://chat.whatsapp.com/GStTFRoRsCsAIQcmWYjpjn" target="_blank" class="contact-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            Grupo de Chat
+                        </a>
+                        <a href="https://t.me/Aescorpxx" target="_blank" class="contact-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.073l3.9 1.205 2.25 6.54c.122.356.451.61.834.61s.71-.253.834-.61l2.25-6.54 9.75-3.007c.711-.22 1.17-.864 1.17-1.573s-.459-1.353-1.17-1.573l-16.5-7.5c-.392-.18-.825-.214-1.222-.14z"/>
+                            </svg>
+                            Canal do Telegram
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-link-group">
+                    <h3>Contato</h3>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/553497624877" target="_blank" class="contact-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            WhatsApp do Dev
+                        </a>
+                        <a href="tel:+551152950000" class="contact-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a259ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            Suporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-copyright">
+            <p>© 2025 AesCorp todos os direitos reservados</p>
+        </div>
+    </footer>
 
-      <label>Mensagem:</label>
-      <textarea name="mensagem" rows="4" required></textarea>
-
-      <button type="submit">Enviar Mensagens</button>
-
-      <a href="https://whatsapp.com/channel/0029Vaze0KiD38CUIIiZJG0W" target="_blank" class="canal-btn" style="margin-top: 10px;">Canal AESCORP</a>
-    </form>
-
-    <p id="status"></p>
-    <p id="contador-label">Mensagens Enviadas:</p>
-    <p id="contador">0 / 100</p>
-  </div>
-
-  <script>
-    let valorAtual = 0;
-    const valorFinal = 100;
-    let animandoContador = false;
-
-    function atualizarContadorSuave(valor) {
-      if (animandoContador) return;
-      animandoContador = true;
-      const incremento = 1;
-
-      const intervalo = setInterval(() => {
-        if (valorAtual >= valor) {
-          clearInterval(intervalo);
-          animandoContador = false;
-          document.getElementById('status').innerText = 'Status: Disparo concluído.';
-          return;
+    <script src="script.js"></script>
+    <script>
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        function resizeMatrixCanvas() {
+            canvas.width = document.querySelector('.hero-content').offsetWidth;
+            canvas.height = document.querySelector('.hero-content').offsetHeight;
         }
-        valorAtual += incremento;
-        document.getElementById('contador').innerText = `${valorAtual} / ${valorFinal}`;
-      }, 60);
-    }
-
-    const form = document.getElementById('formEnviar');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      await fetch('/atualizar', {
-        method: 'POST',
-        body: new FormData(form),
-      });
-
-      document.getElementById('status').innerText = 'Status: Disparo iniciado.';
-      valorAtual = 0;
-      document.getElementById('contador').innerText = `0 / ${valorFinal}`;
-
-      await fetch('/enviar', { method: 'POST' });
-      atualizarContadorSuave(valorFinal);
-    });
-  </script>
-
-  <script>
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = '01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array.from({ length: columns }, () => 1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f0';
-      ctx.font = `${fontSize}px monospace`;
-
-      drops.forEach((y, x) => {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, x * fontSize, y * fontSize);
-
-        if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[x] = 0;
+        resizeMatrixCanvas();
+        window.addEventListener('resize', resizeMatrixCanvas);
+        const letters = '01';
+        const fontSize = 18;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = Array(columns).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(24,28,47,0.13)'; // fundo da paleta
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillStyle = Math.random() > 0.5 ? '#a259ff' : '#00cfff'; // paleta do site
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
         }
-
-        drops[x]++;
-      });
-    }
-
-    setInterval(draw, 33);
-  </script>
+        drawMatrix();
+    </script>
 </body>
 </html>
